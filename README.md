@@ -32,8 +32,9 @@
 ## Informasi Driver dan Firmware
 
 - **Driver**:
-  - `rtl8xxxu` (Driver bawaan kernel)
-  - `8188eu` (Driver alternatif)
+  - `rtl8xxxu` Driver bawaan kernel Linux (mainline)
+  - `r8188eu` Driver bawaan kernel Linux (staging driver)
+  - `8188eu` Driver alternatif (direkomendasikan untuk mode Monitor & packet injection)
 - **Firmware**: `rtl8188eufw.bin`
 
 ## Masalah
