@@ -255,6 +255,26 @@ Kalau cara pertama gagal, bisa menggunakan cara kedua. Ini caranya:
    apt-get install linux-headers-6.16.8+kali-amd64
    ```
 
+   Blacklist driver bawaan kernel:
+
+   ```
+   nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
+   ```
+
+   Isi dengan:
+
+   ```
+   blacklist rtl8xxxu
+   blacklist r8188eu
+   ```
+
+   Unload driver lama dan load driver baru:
+   
+   ```
+   modprobe -r rtl8xxxu
+   modprobe 8188eu
+   ```
+
    Restart Kali Linux:
 
    ```
@@ -281,6 +301,17 @@ Kalau cara pertama gagal, bisa menggunakan cara kedua. Ini caranya:
    ```
    
    Versi kernel sudah diperbarui yang tadinya versi `6.12.38+kali-amd64` menjadi versi `6.16.8+kali-amd64`.
+1. Pastikan driver sudah benar:
+   
+   ```
+   ethtool -i wlan0
+   ```
+
+   Outputnya:
+
+   ```
+   driver: 8188eu
+   ```
 1. Instal lagi drivernya:
    
    ```
@@ -319,11 +350,14 @@ Kalau cara pertama gagal, bisa menggunakan cara kedua. Ini caranya:
    Pastikan muncul output seperti ini:
    
    ```
-   wlan0     IEEE 802.11  ESSID:off/any  
-             Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
-             Retry short limit:7   RTS thr=2347 B   Fragment thr:off
-             Encryption key:off
+   wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
+             Mode:Auto  Frequency=2.412 GHz  Access Point: Not-Associated   
+             Sensitivity:0/0  
+             Retry:off   RTS thr:off   Fragment thr:off
              Power Management:off
+             Link Quality:0  Signal level:0  Noise level:0
+             Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+             Tx excessive retries:0  Invalid misc:0   Missed beacon:0
    ```
 1. Hentikan semua proses yang dapat mengganggu:
    
@@ -354,9 +388,15 @@ Kalau cara pertama gagal, bisa menggunakan cara kedua. Ini caranya:
    Pastikan muncul output seperti ini:
    
    ```
-   wlan0     IEEE 802.11  Mode:Monitor  Frequency:2.412 GHz  Tx-Power=20 dBm   
-             Retry short limit:7   RTS thr=2347 B   Fragment thr:off
+   wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
+             Mode:Monitor  Frequency=2.457 GHz  Access Point: Not-Associated   
+             Sensitivity:0/0  
+             Retry:off   RTS thr:off   Fragment thr:off
+             Encryption key:off
              Power Management:off
+             Link Quality:0  Signal level:0  Noise level:0
+             Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+             Tx excessive retries:0  Invalid misc:0   Missed beacon:0
    ```
 1. Tes packet injection:
     
@@ -408,10 +448,17 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    ```
    cd rtl8188eus
    ```
-1. Blacklist modul kernel bawaan `r8188eu`:
+1. Blacklist driver bawaan kernel:
 
    ```
-   echo 'blacklist r8188eu' | tee /etc/modprobe.d/realtek.conf
+   nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
+   ```
+
+   Isi dengan:
+
+   ```
+   blacklist rtl8xxxu
+   blacklist r8188eu
    ```
 1. Instal driver:
 
@@ -433,7 +480,13 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    # 2. Instal modul hasil compile ke sistem
    $ make install
 
-   # 3. Restart Kali Linux
+   # 3. Unload driver lama
+   modprobe -r rtl8xxxu
+
+   # 4. Load driver baru
+   modprobe 8188eu
+
+   # 5. Restart Kali Linux
    $ reboot
    ```
 
@@ -475,7 +528,13 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    # 1. Instal driver Via DKMS
    $ ./dkms-install.sh
 
-   # 2. Restart Kali Linux
+   # 2. Unload driver lama
+   modprobe -r rtl8xxxu
+
+   # 3. Load driver baru
+   modprobe 8188eu
+
+   # 4. Restart Kali Linux
    $ reboot
    ```
 
@@ -519,6 +578,22 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    ```
    
    Kalau tidak ada error pada saat kompilasi baik menggunakan metode Compile atau Via DKMS bisa ke langkah selanjutnya.
+1. Restart Kali Linux:
+
+   ```
+   reboot
+   ```
+1. Pastikan driver sudah benar:
+
+   ```
+   ethtool -i wlan0
+   ```
+
+   Outputnya:
+
+   ```
+   driver: 8188eu
+   ```
 1. Cek apakah interfacenya muncul:
    
    ```
@@ -528,11 +603,14 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    Pastikan muncul output seperti ini:
    
    ```
-   wlan0     IEEE 802.11  ESSID:off/any  
-             Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm   
-             Retry short limit:7   RTS thr=2347 B   Fragment thr:off
-             Encryption key:off
+   wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
+             Mode:Auto  Frequency=2.412 GHz  Access Point: Not-Associated   
+             Sensitivity:0/0  
+             Retry:off   RTS thr:off   Fragment thr:off
              Power Management:off
+             Link Quality:0  Signal level:0  Noise level:0
+             Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+             Tx excessive retries:0  Invalid misc:0   Missed beacon:0
    ```
 1. Hentikan semua proses yang dapat mengganggu:
    
@@ -563,9 +641,15 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
    Pastikan muncul output seperti ini:
    
    ```
-   wlan0     IEEE 802.11  Mode:Monitor  Frequency:2.412 GHz  Tx-Power=20 dBm   
-             Retry short limit:7   RTS thr=2347 B   Fragment thr:off
+   wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
+             Mode:Monitor  Frequency=2.457 GHz  Access Point: Not-Associated   
+             Sensitivity:0/0  
+             Retry:off   RTS thr:off   Fragment thr:off
+             Encryption key:off
              Power Management:off
+             Link Quality:0  Signal level:0  Noise level:0
+             Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+             Tx excessive retries:0  Invalid misc:0   Missed beacon:0
    ```
 1. Tes packet injection:
     
