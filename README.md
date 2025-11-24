@@ -617,6 +617,29 @@ Kalau cara pertama, kedua, dan ketiga gagal, bisa menggunakan cara keempat. Ini 
    ```
    ./instal_kernel_linux_5.15.5.sh
    ```
+1. Blacklist driver bawaan kernel Linux:
+
+   ```
+   nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
+   ```
+
+   Isi dengan:
+
+   ```
+   blacklist rtl8xxxu
+   blacklist r8188eu
+   ```
+1. Update sistem agar blacklist aktif:
+   
+   ```
+   update-initramfs -u
+   depmod -a
+   ```
+1. Restart Kali Linux:
+
+   ```
+   reboot
+   ```
 1. Pilih yang **Kali GNU/Linux, with Linux 5.15.5** yang atas:
 
    ![](https://github.com/fixploit03/TP-LINK-TL-WN722N-V2/blob/main/img/3.png)
@@ -631,23 +654,9 @@ Kalau cara pertama, kedua, dan ketiga gagal, bisa menggunakan cara keempat. Ini 
    ```
    5.15.5-051505-generic
    ```
-1. Blacklist driver bawaan kernel Linux:
-
-   ```
-   nano /etc/modprobe.d/blacklist-rtl8xxxu.conf
-   ```
-
-   Isi dengan:
-
-   ```
-   blacklist rtl8xxxu
-   blacklist r8188eu
-   ```
-1. Unload driver lama dan load driver baru:
+1. Load driver baru:
    
    ```
-   modprobe -r rtl8xxxu
-   modprobe -r r8188eu
    modprobe 8188eu
    ```
 1. Verifikasi perubahan:
