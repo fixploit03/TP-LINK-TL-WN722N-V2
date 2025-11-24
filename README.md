@@ -272,6 +272,7 @@ Kalau cara pertama gagal, bisa menggunakan cara kedua. Ini caranya:
    
    ```
    modprobe -r rtl8xxxu
+   modprobe -r r8188eu
    modprobe 8188eu
    ```
 
@@ -482,6 +483,7 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
 
    # 3. Unload driver lama
    modprobe -r rtl8xxxu
+   modprobe -r r8188eu
 
    # 4. Load driver baru
    modprobe 8188eu
@@ -530,6 +532,7 @@ Kalau cara pertama dan kedua gagal, bisa menggunakan cara ketiga. Ini caranya:
 
    # 2. Unload driver lama
    modprobe -r rtl8xxxu
+   modprobe -r r8188eu
 
    # 3. Load driver baru
    modprobe 8188eu
