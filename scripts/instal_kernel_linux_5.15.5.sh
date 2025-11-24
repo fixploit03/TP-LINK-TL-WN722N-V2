@@ -161,20 +161,20 @@ else
 fi
 
 # Nanya mau reboot apa kaga
-read -p "${ib}[#] ${ip}Apakah Anda ingin me-reboot sistem Anda? [Y/n]: " nanya_reboot
-
+# read -p "${ib}[#] ${ip}Apakah Anda ingin me-reboot sistem Anda? [Y/n]: " nanya_reboot
+#
 # Iya
-if [[ "${nanya_reboot}" == "y" || "${nanya_reboot}" == "Y" ]]; then
-        reboot
+# if [[ "${nanya_reboot}" == "y" || "${nanya_reboot}" == "Y" ]]; then
+#        reboot
 # Kaga
-elif [[ "${nanya_reboot}" == "n" || "${nanya_reboot}" == "N" ]]; then
-        echo -e "${b}[*] ${p}Keluar dari script.${r}"
-        exit 0
+# elif [[ "${nanya_reboot}" == "n" || "${nanya_reboot}" == "N" ]]; then
+#        echo -e "${b}[*] ${p}Keluar dari script.${r}"
+#        exit 0
 # Inputan salah
-else
-        echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan Y/n.${r}"
-        exit 1
-fi
+# else
+#        echo -e "${m}[-] ${p}Masukkan tidak valid. Harap masukkan Y/n.${r}"
+#        exit 1
+# fi
 
 # Selesai
 #
