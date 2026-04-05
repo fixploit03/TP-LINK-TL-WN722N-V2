@@ -1,5 +1,7 @@
 # Instal Driver TP-LINK TL-WN722N V2/V3 di Kali Linux
 
+![](https://github.com/fixploit03/TP-LINK-TL-WN722N-V2/blob/main/img/wi-fi-adapter-tp-link-tl-wn722n.jpeg)
+
 ## Informasi Hardware
 - Chipset: Realtek RTL8188EUS
 - Vendor ID (VID): 2357
@@ -43,6 +45,11 @@ sudo modprobe 8188eu
 ```bash
 lsmod | grep "8188eu"
 ```
+
+## Testing
+
+![](https://github.com/fixploit03/TP-LINK-TL-WN722N-V2/blob/main/img/6.png)
+![](https://github.com/fixploit03/TP-LINK-TL-WN722N-V2/blob/main/img/5.png)
 
 ## Masalah
 
